@@ -1,0 +1,25 @@
+version: '3.4'
+
+volumes:
+  cache:
+  logs:
+
+services:
+
+  api-test-server:
+    build:
+      context: .
+      target: webserver-dev
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+        - .:/var/www/html
+        - cache:/var/www/html/var/cache:Z
+        - logs:/var/www/html/var/log:Z
+        - ./apache2/config/dev/sites-available:/etc/apache2/sites-available
+        - ./apache2/config/dev/php/apache2/php.ini:/usr/local/etc/php/php.ini
+    working_dir: /var/www/html
+    environment:
+      - APACHE_DOCUMENT_ROOT=/var/www/html/public
+      - APP_ENV=dev
