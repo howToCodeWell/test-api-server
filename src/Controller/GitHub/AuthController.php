@@ -16,14 +16,34 @@ use Symfony\Component\Routing\Annotation\Route;
 class AuthController extends AbstractController
 {
     /**
-     * @Route("/login/oauth/authorize", name="auth")
+     * @Route("/login/oauth/authorize", name="authorize")
      * @param Request $request
      * @return Response
      */
-    public function auth(Request $request): Response
+    public function authorize(Request $request): Response
     {
-        return new JsonResponse([
+        $state = $request->get('state');
 
+        return new JsonResponse([
+            'code' => "abc",
+            'state' => $state
+        ]);
+    }
+
+    /**
+     * @Route("/login/oauth/access_token", name="access_token")
+     * @param Request $request
+     * @return Response
+     */
+    public function accessToken(Request $request): Response
+    {
+        $scope = $request->get('scope', 'user');
+        $tokenType = 'bearer';
+
+        return new JsonResponse([
+            'access_token' => "abc",
+            'scope' => $scope,
+            'token_type' => $tokenType
         ]);
     }
 }
