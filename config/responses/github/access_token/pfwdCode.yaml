@@ -1,8 +1,0 @@
-status_code: 200
-headers: []
-body:
-  access_token: pfwd123
-  scope: user
-  token_type: bearer
-
-

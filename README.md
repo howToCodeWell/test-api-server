@@ -20,18 +20,25 @@ $ make uninstall
 Pull requests and issues are welcome but please run `make test` before submitting any PRs as this will perform code analysis and run the test suites
 ## Mock GitHub API
 
-### Get access token
+### Authorize
+POST/GET http://localhost:8080/github/login/oauth/authorize?state=dummyRandomState
+
+BODY
+
+state=dummyRandomState
+
+### Generate access token
 POST/GET http://localhost:8080/github/login/oauth/access_token
 
 BODY 
 
-code=test123Code
+code=dummyRandomCode
 
 ### Get a user
 GET http://localhost:8080/github/api/v3/user
 
 HEADERS 
 
-Authorization = Bearer test123
+Authorization = Bearer dummyAccessToken
 
 

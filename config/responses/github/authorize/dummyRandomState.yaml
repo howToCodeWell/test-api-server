@@ -1,0 +1,7 @@
+status_code: 200
+headers: []
+body:
+  state: dummyRandomState
+  code: dummyRandomCode
+
+

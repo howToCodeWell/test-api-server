@@ -9,6 +9,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GitHubResponseManager extends AbstractResponseManager implements ResponseManagerInterface
 {
+    public function createAuthorizeFromRequest(Request $request)
+    {
+        $state = $this->getStateFromRequest($request);
+        if (empty($state)) {
+            throw new AccessDeniedHttpException('State Not Supplied');
+        }
+        $config = $this->getResponseConfig('authorize', $state);
+        return new ResponseConfig($config['body'], $config['status_code']);
+    }
+
     public function create(Request $request, string $endPoint): ResponseConfig
     {
         $token = $this->getAccessTokenFromRequest($request);
