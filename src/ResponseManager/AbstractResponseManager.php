@@ -8,7 +8,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class AbstractResponseManager
 {
-    public function getStateFromRequest(Request $request)
+    public function getStateFromRequest(Request $request): ?string
     {
         if ($request->isMethod('GET')) {
             $code = $request->query->get('state');
