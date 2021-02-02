@@ -7,7 +7,7 @@ stop:
 build:
 	docker-compose build
 remove:
-	docker-compose down --rmi='all' --volumes
+	docker-compose down --rmi='local' --volumes
 vendor-install:
 	docker-compose exec api-test-server composer install
 vendor-update:
