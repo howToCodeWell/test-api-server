@@ -12,9 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class GitHubController
  * @package App\Controller
- * @Route("/github", name="github_auth_")
+ * @Route("/github", name="github_user_")
  */
-class AuthController extends AbstractController
+class UserController extends AbstractController
 {
     private GitHubResponseManager $responseManager;
 
@@ -24,30 +24,15 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/login/oauth/authorize", name="authorize")
+     * @Route("/api/v3/user", name="index")
      * @param Request $request
      * @return Response
      */
-    public function authorize(Request $request): Response
+    public function index(Request $request): Response
     {
-        $state = $request->get('state');
-
-        return new JsonResponse([
-            'code' => "abc",
-            'state' => $state
-        ]);
-    }
-
-    /**
-     * @Route("/login/oauth/access_token", name="access_token")
-     * @param Request $request
-     * @return Response
-     */
-    public function accessToken(Request $request): Response
-    {
-
-        $responseData = $this->responseManager->createFromCode($request, 'access_token');
+        $responseData = $this->responseManager->create($request, 'user');
 
         return new JsonResponse($responseData->getBody(), $responseData->getStatusCode());
     }
+
 }
