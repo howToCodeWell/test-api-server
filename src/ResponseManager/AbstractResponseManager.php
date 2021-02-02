@@ -7,9 +7,12 @@ use Symfony\Component\Yaml\Yaml;
 
 class AbstractResponseManager
 {
-    public function getAccessTokenFromRequest(Request $request): string
+    public function getAccessTokenFromRequest(Request $request): ?string
     {
         $headerValue = $request->headers->get('Authorization');
+        if (empty($headerValue)) {
+            return null;
+        }
         $parts = explode(' ', $headerValue);
         return $parts[1];
     }

@@ -3,6 +3,7 @@
 namespace App\ResponseManager;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GitHubResponseManager extends AbstractResponseManager implements ResponseManagerInterface
@@ -10,6 +11,9 @@ class GitHubResponseManager extends AbstractResponseManager implements ResponseM
     public function create(Request $request, string $endPoint): ResponseConfig
     {
         $token = $this->getAccessTokenFromRequest($request);
+        if (empty($token)) {
+            throw new AccessDeniedHttpException('Access Token Not Supplied');
+        }
         $config = $this->getResponseConfig($endPoint, $token);
         return new ResponseConfig($config['body'], $config['status_code']);
     }
