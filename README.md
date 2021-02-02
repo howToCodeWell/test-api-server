@@ -1,4 +1,6 @@
 # test-api-server
+![Travis (.org)](https://img.shields.io/travis/howToCodeWell/test-api-server)
+
 A  Test API Server written in Symfony for mocking external API responses.
 
 ## Install
