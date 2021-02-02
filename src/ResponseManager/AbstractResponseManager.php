@@ -4,6 +4,8 @@ declare(strict_types=1);
 namespace App\ResponseManager;
 
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
 class AbstractResponseManager
@@ -42,6 +44,10 @@ class AbstractResponseManager
     public function getResponseConfig(string $endPoint, string $filename): array
     {
         $path = '../config/responses/github/' . $endPoint . '/' . $filename . '.yaml';
-        return Yaml::parseFile($path);
+        try {
+            return Yaml::parseFile($path);
+        } catch (ParseException $exception) {
+            throw new BadRequestHttpException('Cannot get ' . $path, $exception);
+        }
     }
 }

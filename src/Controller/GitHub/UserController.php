@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class UserController
  * @package App\Controller
- * @Route("/github", name="github_user_")
+ * @Route("/github", name="github_user_", format="json")
  */
 class UserController extends AbstractController
 {
