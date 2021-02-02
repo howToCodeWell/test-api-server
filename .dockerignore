@@ -1,0 +1,10 @@
+Makefile
+vendor
+var
+tests/_output
+.dockerignore
+.gitignore
+*.md
+.idea
+.DS_Store
+docker-compose.*
