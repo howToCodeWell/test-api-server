@@ -6,7 +6,6 @@ use App\ResponseManager\GitHubResponseManager;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
@@ -24,28 +23,64 @@ class AuthController extends AbstractController
     }
 
     /**
+     * @todo this should be in config
+     */
+    private array $responseData = [
+        'authorize' => [
+            [
+                'request' => [
+                    'state' => 'abcd',
+                ],
+                'response' => [
+                    'state' => 'abcd',
+                    'code' => '1234',
+                ],
+            ],
+            [
+                'request' => [
+                    'state' => 'state-should-not-match',
+                ],
+                'response' => [
+                    'state' => 'state-does-not-match',
+                    'code' => '1234x',
+                ],
+            ],
+        ],
+    ];
+
+    /**
      * @Route("/login/oauth/authorize", name="authorize")
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
-    public function authorize(Request $request): Response
+    public function authorize(Request $request): JsonResponse
     {
-        $state = $request->get('state');
+        $state = $request->get('state', 'abcd');
+        $code = 'abcd';
 
-        return new JsonResponse([
-            'code' => "abc",
-            'state' => $state
-        ]);
+        // Get the response based on the request
+        foreach($this->responseData['authorize'] as $data){
+            if($data['request']['state'] === $state){
+                $code = $data['response']['code'];
+                $state = $data['response']['state'];
+            }
+        }
+
+        return new JsonResponse(
+            [
+                'code' => $code,
+                'state' => $state,
+            ]
+        );
     }
 
     /**
      * @Route("/login/oauth/access_token", name="access_token")
      * @param Request $request
-     * @return Response
+     * @return JsonResponse
      */
-    public function accessToken(Request $request): Response
+    public function accessToken(Request $request): JsonResponse
     {
-
         $responseData = $this->responseManager->createFromCode($request, 'access_token');
 
         return new JsonResponse($responseData->getBody(), $responseData->getStatusCode());
