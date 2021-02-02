@@ -13,7 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class UserController
  * @package App\Controller
- * @Route("/github", name="github_user_", format="json")
+ * @Route("/github", name="github_user_", format="json", requirements={"_format":"json"})
  */
 class UserController extends AbstractController
 {
@@ -25,7 +25,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/api/v3/user", name="index")
+     * @Route("/api/v3/user", name="index", methods={"GET"})
      * @param Request $request
      * @return Response
      */

@@ -12,7 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 /**
  * Class GitHubController
  * @package App\Controller
- * @Route("/github", name="github_auth_", format="json")
+ * @Route("/github", name="github_auth_", format="json", requirements={"_format":"json"})
  */
 class AuthController extends AbstractController
 {
@@ -24,7 +24,7 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/login/oauth/authorize", name="authorize")
+     * @Route("/login/oauth/authorize", name="authorize", methods={"GET","POST"})
      * @param Request $request
      * @return JsonResponse
      */
@@ -36,7 +36,7 @@ class AuthController extends AbstractController
     }
 
     /**
-     * @Route("/login/oauth/access_token", name="access_token")
+     * @Route("/login/oauth/access_token", name="access_token", methods={"POST"})
      * @param Request $request
      * @return JsonResponse
      */
