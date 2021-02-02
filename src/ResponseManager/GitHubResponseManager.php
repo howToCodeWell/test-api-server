@@ -3,7 +3,6 @@
 namespace App\ResponseManager;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class GitHubResponseManager extends AbstractResponseManager implements ResponseManagerInterface

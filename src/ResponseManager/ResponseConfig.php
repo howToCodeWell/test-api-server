@@ -12,6 +12,7 @@ class ResponseConfig
     {
         $this->body = $body;
         $this->statusCode = $statusCode;
+        $this->headers = $headers;
     }
 
     /**
