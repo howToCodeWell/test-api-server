@@ -1,5 +1,5 @@
 <?php
-
+declare(strict_types=1);
 namespace App\ResponseManager;
 
 use Symfony\Component\HttpFoundation\Request;
@@ -25,7 +25,6 @@ class AbstractResponseManager
             $code = $request->request->get('code');
         }
         return $code;
-
     }
 
 

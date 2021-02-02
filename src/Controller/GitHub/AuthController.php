@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller\GitHub;
 
@@ -59,8 +60,8 @@ class AuthController extends AbstractController
         $code = 'abcd';
 
         // Get the response based on the request
-        foreach($this->responseData['authorize'] as $data){
-            if($data['request']['state'] === $state){
+        foreach ($this->responseData['authorize'] as $data) {
+            if ($data['request']['state'] === $state) {
                 $code = $data['response']['code'];
                 $state = $data['response']['state'];
             }

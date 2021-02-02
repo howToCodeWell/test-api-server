@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\ResponseManager;
 
@@ -68,7 +69,4 @@ class ResponseConfig
         $this->headers = $headers;
         return $this;
     }
-
-
-
 }

@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace App\Controller\GitHub;
 
@@ -10,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * Class GitHubController
+ * Class UserController
  * @package App\Controller
  * @Route("/github", name="github_user_")
  */
@@ -34,5 +35,4 @@ class UserController extends AbstractController
 
         return new JsonResponse($responseData->getBody(), $responseData->getStatusCode());
     }
-
 }

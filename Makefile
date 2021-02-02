@@ -15,13 +15,17 @@ vendor-update:
 vendor-update-dry-run:
 	docker-compose exec api-test-server composer update --dry-run
 
+code-style:
+	docker-compose exec api-test-server bin/phpcbf src
+mess-detector:
+	docker-compose exec api-test-server bin/phpmd src ansi ./ruleset.xml
 static-analysis:
 	docker-compose exec api-test-server bin/phpstan analyse
 
 test-unit:
 	docker-compose exec api-test-server bin/codecept run unit
 
-test: static-analysis test-unit
+test: code-style static-analysis test-unit
 
 install: build up vendor-install test
 uninstall: down remove
