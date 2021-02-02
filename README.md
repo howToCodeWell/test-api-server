@@ -2,7 +2,7 @@
 A  Test API Server written in Symfony for mocking external API responses.
 
 ## Install
-This will download the Docker images, run the containers, install the vendor packages and run the tests
+This will download the Docker images, run the containers and install the vendor packages.
 ```bash
 $ make install
 ```

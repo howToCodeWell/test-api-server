@@ -27,5 +27,5 @@ test-unit:
 
 test: code-style static-analysis test-unit
 
-install: build up vendor-install test
+install: build up vendor-install
 uninstall: down remove
