@@ -5,6 +5,7 @@ namespace App\ResponseManager;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Yaml\Exception\ParseException;
 use Symfony\Component\Yaml\Yaml;
 
@@ -47,7 +48,7 @@ class AbstractResponseManager
         try {
             return Yaml::parseFile($path);
         } catch (ParseException $exception) {
-            throw new BadRequestHttpException('Cannot get ' . $path, $exception);
+            throw new NotFoundHttpException('Not Found');
         }
     }
 }
