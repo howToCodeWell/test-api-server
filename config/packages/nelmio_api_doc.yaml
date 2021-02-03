@@ -1,0 +1,9 @@
+nelmio_api_doc:
+    documentation:
+        info:
+            title: API Test Server
+            description: Test Server from howtocodewell.net
+            version: 1.0.0
+    areas: # to filter documented areas
+        path_patterns:
+            - ^/github
