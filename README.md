@@ -43,4 +43,5 @@ HEADERS
 
 Authorization = Bearer dummyAccessToken
 
+Please see http://localhost:8080/api/doc for more endpoints
 
