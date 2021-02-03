@@ -9,11 +9,15 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Swagger\Annotations as SWG;
+use Nelmio\ApiDocBundle\Annotation\Security;
 
 /**
  * Class UserController
  * @package App\Controller
  * @Route("/github", name="github_user_", format="json", requirements={"_format":"json"})
+ * @SWG\Tag(name="auth")
+ * @SWG\Tag(name="github")
  */
 class UserController extends AbstractController
 {
@@ -26,6 +30,9 @@ class UserController extends AbstractController
 
     /**
      * @Route("/api/v3/user", name="index", methods={"GET"})
+     * @SWG\Response(response=200, description="Get authenticated user")
+     * @SWG\Parameter(name="Authorization", in="header", type="string")
+     * @Security(name="Bearer")
      * @param Request $request
      * @return Response
      */
