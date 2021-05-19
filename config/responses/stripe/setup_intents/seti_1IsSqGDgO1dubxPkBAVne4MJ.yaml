@@ -1,0 +1,22 @@
+status_code: 200
+headers: [ ]
+body:
+  "id": "seti_1EzVO3HssDVaQm2PJjXHmLlM"
+  "object": "setup_intent"
+  "application": null
+  "cancellation_reason": null
+  "client_secret": null
+  "created": 1561420781
+  "customer": "cus_JQIGp7xMy9cFw0"
+  "description": null
+  "last_setup_error": null
+  "livemode": false
+  "metadata":
+    "subscription_id": "sub_8epEF0PuRhmltU"
+  "next_action": null
+  "on_behalf_of": null
+  "payment_method": "pm_1F0c9v2eZvKYlo2CJDeTrB4n"
+  "payment_method_types":
+    - "card"
+  "status": "succeeded"
+  "usage": "off_session"
