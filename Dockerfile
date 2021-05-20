@@ -3,6 +3,8 @@ FROM php:8.0.1-apache-buster as webserver-base
 
 LABEL maintainer="Peter Fisher"
 
+ARG APP_ENV=prod
+ENV APP_ENV=$APP_ENV
 ARG DEBIAN_FRONTEND=noninteractive
 ENV APACHE_DOCUMENT_ROOT="/var/www/html/public"
 RUN apt-get update --fix-missing \
@@ -24,10 +26,24 @@ RUN apt-get install -y --no-install-recommends  \
                                                     --install-dir=/usr/local/bin \
                                                     --filename=composer
 
+RUN pecl install xdebug-3.0.0 && docker-php-ext-enable xdebug
+
 FROM dev-builder as webserver-dev
+COPY composer.json .
+COPY composer.lock .
+RUN composer install --optimize-autoloader
+
 COPY --chown=www-data:www-data  . .
-RUN mkdir -p var/log && chmod -R 777 var/log
+COPY ./apache2/config/${APP_ENV}/sites-available/000-default.conf /etc/apache2/sites-available/000-default.conf
+COPY ./apache2/config/${APP_ENV}/php/apache2/php.ini /usr/local/etc/php/php.ini
+COPY ./apache2/scripts/docker-entrypoint.sh /
+
+RUN mkdir -p var/log \
+    && mkdir -p var/cache \
+    && chown www-data:www-data -Rf var/log \
+    && chown www-data:www-data -Rf var/cache \
+    && chmod +x /docker-entrypoint.sh
 
 EXPOSE 80
 
-CMD apachectl -D FOREGROUND
+ENTRYPOINT ["/docker-entrypoint.sh"]

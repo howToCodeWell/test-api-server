@@ -11,6 +11,21 @@ use Symfony\Component\Yaml\Yaml;
 
 class StripeResponseManager extends AbstractResponseManager implements ResponseManagerInterface
 {
+
+    public function updateCustomer(Request $request): ResponseConfig
+    {
+        $customerID = $request->get('customer_id');
+        $config = $this->getResponseConfig('customers', $customerID);
+        return new ResponseConfig($config['body'], $config['status_code']);
+    }
+
+    public function getCustomer(Request $request): ResponseConfig
+    {
+        $customerID = $request->get('customer_id');
+        $config = $this->getResponseConfig('customers', $customerID);
+        return new ResponseConfig($config['body'], $config['status_code']);
+    }
+
     public function create(Request $request, string $endPoint): ResponseConfig
     {
         $id = $request->get('intent_id');

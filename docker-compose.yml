@@ -4,6 +4,10 @@ volumes:
   cache:
   logs:
 
+networks:
+  howtocodewell:
+    external: true
+
 services:
 
   api-test-server:
@@ -23,3 +27,4 @@ services:
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html/public
       - APP_ENV=dev
+      - HOST_IP=${HOST_IP}

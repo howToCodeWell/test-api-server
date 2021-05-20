@@ -10,16 +10,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Swagger\Annotations as SWG;
-use Nelmio\ApiDocBundle\Annotation\Security;
 
 /**
- * Class SetupIntentsController
+ * Class CustomersController
  * @package App\Controller
- * @Route("/stripe", name="stripe_setup_intents_", format="json", requirements={"_format":"json"})
- * @SWG\Tag(name="auth")
- * @SWG\Tag(name="github")
+ * @Route("/stripe", name="stripe_customers_", format="json", requirements={"_format":"json"})
  */
-class SetupIntentsController extends AbstractController
+class CustomersController extends AbstractController
 {
     private StripeResponseManager $responseManager;
 
@@ -28,17 +25,22 @@ class SetupIntentsController extends AbstractController
         $this->responseManager = $responseManager;
     }
 
+
+
     /**
-     * @Route("/v1/setup_intents/{intent_id}", name="index", methods={"GET"})
+     * @Route("/v1/customers/{customer_id}", name="index", methods={"GET", "POST"})
      * @SWG\Response(response=200, description="Get intent")
      * @SWG\Parameter(name="Authorization", in="header", type="string")
-     * @Security(name="Bearer")
      * @param Request $request
      * @return Response
      */
     public function index(Request $request): Response
     {
-        $responseData = $this->responseManager->create($request, 'setup_intents');
+        if($request->isMethod('POST')){
+            $responseData = $this->responseManager->updateCustomer($request);
+        } else {
+            $responseData = $this->responseManager->getCustomer($request);
+        }
 
         return new JsonResponse($responseData->getBody(), $responseData->getStatusCode());
     }
