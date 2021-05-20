@@ -4,10 +4,6 @@ volumes:
   cache:
   logs:
 
-networks:
-  howtocodewell:
-    external: true
-
 services:
 
   api-test-server:
