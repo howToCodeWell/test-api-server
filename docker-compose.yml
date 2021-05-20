@@ -23,3 +23,4 @@ services:
     environment:
       - APACHE_DOCUMENT_ROOT=/var/www/html/public
       - APP_ENV=dev
+      - HOST_IP=${HOST_IP}
