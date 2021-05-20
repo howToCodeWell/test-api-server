@@ -36,7 +36,7 @@ class CustomersController extends AbstractController
      */
     public function index(Request $request): Response
     {
-        if($request->isMethod('POST')){
+        if ($request->isMethod('POST')) {
             $responseData = $this->responseManager->updateCustomer($request);
         } else {
             $responseData = $this->responseManager->getCustomer($request);
